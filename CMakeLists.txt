@@ -9,10 +9,6 @@ include(cmake/static_analyzers.cmake)
 include(cmake/enable_tests.cmake)
 include(GNUInstallDirs)
 
-if (ENABLE_TESTING)
-    enable_tests(${PROJECT_NAME})
-endif()
-
 # set(tl-expected_CompilerOptions ${tl-expected_CompilerOptions})
 # set(tl-expected_LinkerOptions ${tl-expected_LinkerOptions})
 
