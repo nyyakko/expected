@@ -6,7 +6,6 @@ set(EXPORT_DIR "${CMAKE_SOURCE_DIR}/build/cmake")
 
 include(cmake/CPM.cmake)
 include(cmake/static_analyzers.cmake)
-include(cmake/enable_tests.cmake)
 include(GNUInstallDirs)
 
 # set(tl-expected_CompilerOptions ${tl-expected_CompilerOptions})
