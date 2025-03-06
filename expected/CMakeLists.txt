@@ -1,7 +1,7 @@
 add_subdirectory(include/tl)
 
-add_library(${PROJECT_NAME} INTERFACE ${tl-expected_HeaderFiles})
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+add_library(${PROJECT_NAME} INTERFACE ${expected_HeaderFiles})
+add_library(tl::expected ALIAS ${PROJECT_NAME})
 
 if (ENABLE_CLANGTIDY)
     enable_clang_tidy(${PROJECT_NAME})
@@ -21,11 +21,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERIFY_INTERFACE_HEADER_SETS TR
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_23)
 
-target_sources(${PROJECT_NAME} PUBLIC FILE_SET HEADERS BASE_DIRS include FILES ${tl-expected_HeaderFiles})
+target_sources(${PROJECT_NAME} PUBLIC FILE_SET HEADERS BASE_DIRS include FILES ${expected_HeaderFiles})
 
 export(TARGETS      ${PROJECT_NAME}
        FILE         ${EXPORT_DIR}/${PROJECT_NAME}Targets.cmake
-       NAMESPACE    ${PROJECT_NAME}::
+       NAMESPACE    tl::
 )
 
 install(TARGETS     ${PROJECT_NAME}
@@ -37,10 +37,12 @@ install(TARGETS     ${PROJECT_NAME}
 
 install(EXPORT      ${PROJECT_NAME}Targets
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/cmake
-        NAMESPACE   ${PROJECT_NAME}::
+        NAMESPACE   tl::
 )
 
-install(FILES ${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/cmake)
+install(FILES ${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/cmake
+)
 
-target_compile_options(${PROJECT_NAME} INTERFACE ${tl-expected_CompilerOptions})
-target_link_libraries(${PROJECT_NAME} INTERFACE ${tl-expected_ExternalLibraries})
+target_compile_options(${PROJECT_NAME} INTERFACE ${expected_CompilerOptions})
+target_link_libraries(${PROJECT_NAME} INTERFACE ${expected_ExternalLibraries})
