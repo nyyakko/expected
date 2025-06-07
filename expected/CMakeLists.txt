@@ -3,13 +3,13 @@ add_subdirectory(include/tl)
 add_library(${PROJECT_NAME} INTERFACE ${expected_HeaderFiles})
 add_library(tl::expected ALIAS ${PROJECT_NAME})
 
-# if (ENABLE_CLANGTIDY)
-#     enable_clang_tidy(${PROJECT_NAME})
-# endif()
-#
-# if (ENABLE_CPPCHECK)
-#     enable_cppcheck(${PROJECT_NAME})
-# endif()
+if (ENABLE_CLANGTIDY)
+    enable_clang_tidy(${PROJECT_NAME})
+endif()
+
+if (ENABLE_CPPCHECK)
+    enable_cppcheck(${PROJECT_NAME})
+endif()
 
 target_include_directories(${PROJECT_NAME}
     INTERFACE
